@@ -30,6 +30,11 @@ export default {
       toggled: false
     }
   },
+  watch: {
+    $route (to, from){
+        this.toggled = false;
+    }
+  },
   methods:{
     onToggle(){
       //console.log("toggle clicked");

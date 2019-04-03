@@ -46,7 +46,7 @@ export default {
             var qrcode = new QRCode("qrcode");   
             const elText = this.myText;
             if (!elText) {
-                //alert("Input a text");
+                alert("Input a text to generate QR Code");
                 return;
             }
             qrcode.makeCode(elText);
