@@ -1,13 +1,7 @@
 <template>
-    <div class="business ph-50">   
+    <div class="business">   
         <div class="business-template">
             <h2>Select a Business Template.</h2>
-            <div class="template">
-
-            </div>
-            <div class="template">
-
-            </div>
             <div class="template">
 
             </div>
@@ -98,7 +92,28 @@
                     <p>{{ error }}</p>
                 </div>
             </div>
-            <hr>
+            <!-- <hr> -->
+            <!-- <div class="show-qr">
+                <div v-if="!isQrDisplayed">
+                    <h3>Your QR Will appear here!</h3>
+                </div>
+                <div>
+                    <div class="inline-display">
+                        <div id="qrcode"></div>
+                    </div>
+                    <div class="inline-display download-btn" v-if="isQrDisplayed">
+                        <a 
+                            class="btn" 
+                            id="dnbtn"
+                            @click="downloadImage"
+                            download='QR_Code.png'
+                        >Download</a>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+        <div class="adds">
+            <h2>Business Works!!</h2>
             <div class="show-qr">
                 <div v-if="!isQrDisplayed">
                     <h3>Your QR Will appear here!</h3>
@@ -117,9 +132,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="adds">
-            <h2>Business Works!!</h2>
         </div>
     </div>
 </template>
@@ -255,26 +267,32 @@ export default {
     font-size: 20px;
 }
 .business-frm{
-    margin: 0;
-    padding: 0 50px;
+    margin: 10px 0;
+    padding: 0 50px 30px 50px;
     flex-grow: 6;
-    -webkit-box-shadow: 5px 5px 33px 6px rgba(0,0,0,0.6);
-    -moz-box-shadow: 5px 5px 33px 6px rgba(0,0,0,0.6);
-    box-shadow: 5px 5px 33px 6px rgba(0,0,0,0.6);
+    -webkit-box-shadow: 5px 5px 33px 5px rgba(0,0,0,0.6);
+    -moz-box-shadow: 5px 5px 33px 5px rgba(0,0,0,0.6);
+    box-shadow: 5px 5px 33px 5px rgba(0,0,0,0.6);
 }
 .business{
     display: flex;
 }
 .business-template, .adds{
-    flex-grow: 4;
-    padding: 20px;
+    flex-grow: 5;
+    padding: 0 20px;
     display: flex;
     flex-flow: column;
+    /* -webkit-box-shadow: 5px 5px 33px 5px rgba(0,0,0,0.6);
+    -moz-box-shadow: 5px 5px 33px 5px rgba(0,0,0,0.6);
+    box-shadow: 5px 5px 33px 5px rgba(0,0,0,0.6); */
+    margin: 0 20px;
+    /* justify-content: center; */
+    align-items: center;
     /* border: 1px solid black; */
 }
 .show-qr{
-    margin:20px;
-    padding: 20px;
+    /* margin:20px;*/
+    padding: 20px; 
     text-align: center;
     height: 350px;
     border: 1px solid black;
@@ -289,9 +307,9 @@ export default {
     border-radius: 5px;
     height: 150px;
     width: 300px;
-    -webkit-box-shadow: 5px 5px 33px 6px rgba(0,0,0,0.6);
-    -moz-box-shadow: 5px 5px 33px 6px rgba(0,0,0,0.6);
-    box-shadow: 5px 5px 33px 6px rgba(0,0,0,0.6);
+    -webkit-box-shadow: 3px 3px 33px 3px rgba(0,0,0,0.6);
+    -moz-box-shadow: 3px 3px 33px 3px rgba(0,0,0,0.6);
+    box-shadow: 3px 3px 33px 3px rgba(0,0,0,0.6);
 }
 
 /* Media Querry starts here */

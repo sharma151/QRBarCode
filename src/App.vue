@@ -21,6 +21,9 @@ body{
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
+h2{
+  color: indianred;
+}
 .input-text{
   width: 100%;
   padding: 12px 20px;
@@ -32,7 +35,7 @@ body{
 }
 .btn{
   /* width: 100%; */
-  background-color: indianred;
+  background-color:indianred; 
   color: white;
   padding: 14px 20px;
   margin: 10px 0;
