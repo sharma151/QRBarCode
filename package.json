@@ -10,7 +10,6 @@
   "dependencies": {
     "core-js": "^2.6.5",
     "fs": "0.0.1-security",
-    "qr-image": "^3.2.0",
     "vue": "^2.6.6",
     "vue-router": "^3.0.2"
   },

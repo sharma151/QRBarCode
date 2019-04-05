@@ -1,22 +1,24 @@
 <template>
-    <div class="qr">
+    <div class="qr ph-50">
         <h2>Generate your QR Code.</h2>
-        <!-- <form> -->
-            <input 
-                type="text" 
-                class="input-text" 
-                placeholder="Enter Mobile number, URL, Names to generate QR Code here..."
-                v-model="myText"
-                required
-                maxlength="1000"
-            >
-            <button 
-                type="submit" 
-                class="btn"
-                @click="generateQR"
-            >Generate</button>
-        <!-- </form> -->
-        <hr>
+        <div>
+            <form @submit.prevent="generateQR">
+                <input 
+                    type="text" 
+                    class="input-text" 
+                    placeholder="Enter Mobile number, URL, Names to generate QR Code here..."
+                    v-model="myText"
+                    required
+                    maxlength="1000"
+                >
+                <button 
+                    type="submit" 
+                    class="btn"
+                    
+                >Generate</button>
+            </form>
+            <hr>
+        </div>
         <div class="show-qr">
             <div inline-display>
                 <div id="qrcode"></div>
@@ -70,12 +72,8 @@ export default {
 </script>
 <style>
 .qr{
-    margin: 10px 50px;
     text-align: center;
     align-content: center;
-}
-form{
-    margin: 0 250px;
 }
 #qrcode{
     display: inline-block;
