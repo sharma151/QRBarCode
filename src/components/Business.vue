@@ -2,47 +2,8 @@
     <div class="business">   
         <div class="business-template">
             <h2>Select a Business Template.</h2>
-            <div class="template">
-                <div class="flip-inner">
-                    <div class="front-temp temp1">
-                        <div class="temp1-bg"></div>
-                        <div class="temp1-name">
-                            <Strong>Shashi Ranjan Kumar</Strong>
-                            <br><small>S.D.E.T.</small>
-                        </div>
-                        <div class="temp1-content">
-                            <div class="temp1-h"><div style="background-color: red;">E :</div>&nbsp; shashi@cyware.com</div>
-                            <div class="temp1-h"><div style="background-color:#b60b0b">P :</div>&nbsp; +91-9852041771</div>
-                            <div class="temp1-h"><div style="background-color: red;">W:</div>&nbsp; www.cyware.com</div>
-                        </div>
-                        <div id="temp-qr">
-                            <img src="../assets/QR_Code.png">
-                        </div>
-                        <div class="red-ts"></div>
-                        <div class="red-tb"></div>
-                    </div>
-                    <div class="back-temp temp1">
-                        <div class="temp1-bg"></div>
-                        <div class="temp1-name">
-                            <Strong>See you Soon bitch!!!</Strong>
-                            <br><small>Company Name</small>
-                        </div>
-                        <div id="temp1-content">
-                            <img src="../assets/google.png">
-                        </div>
-                        <div class="red-ts"></div>
-                        <div class="red-tb"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="template">
-                <div class="flip-inner">
-                    <div class="front-temp temp2">
-                    </div>
-                    <div class="back-temp temp2">
-                    </div>
-                </div>
-            </div>
+            <template2 :temp2Data="exportResult"></template2>
+            <template3 :temp3Data="exportResult"></template3>
         </div>
         <div class="business-frm">
             <h2>Generate your business QR</h2>
@@ -115,7 +76,7 @@
                                 class="input-text country-code" 
                                 type="text" 
                                 v-model="businessData.countryCode"
-                                placeholder="91"
+                                placeholder="Country code"
                                 maxlength="6"
                             >
                             <input 
@@ -139,60 +100,18 @@
 
         <div class="adds">
             <h2>Business Works!!</h2>
-            <!-- <div class="show-qr">
-                <div v-if="!isQrDisplayed">
-                    <h3>Your QR Will appear here!</h3>
-                </div>
-                <div>
-                    <div class="inline-display">
-                        <div id="qrcode"></div> 
-                    </div>
-                    <div class="inline-display download-btn" v-if="isQrDisplayed">
-                        <a 
-                            class="btn" 
-                            id="dnbtn"
-                            @click="downloadImage"
-                            download='QR_Code.png'
-                        >Download</a>
-                    </div>
-                </div>
-            </div> -->
-            <div class="real-temp temp-front"> <!--v-if="picked === 'temp1'" -->
-                <div class="temp1-bg"></div>
-                <div class="temp1-name">
-                    <Strong>{{businessData.fname +" " + businessData.lname}}</Strong>
-                    <br><small>{{businessData.designation}}</small>
-                </div>
-                <div class="temp1-content" v-if="isQrDisplayed">
-                    <div class="temp1-h"><div style="background-color: red;">E :</div>&nbsp; {{businessData.email}}</div>
-                    <div class="temp1-h"><div style="background-color:#b60b0b">P :</div>&nbsp; {{"+"+businessData.countryCode + "-" + businessData.phoneNumber}}</div>
-                    <div class="temp1-h"><div style="background-color: red;">W:</div>&nbsp; {{businessData.website}}</div>
-                </div>
-                <div id="temp-qr">
-                    <div id="qrcode"></div>
-                </div>
-                <div class="red-ts"></div>
-                <div class="red-tb"></div>
-            </div>
-            <div class="real-temp temp-back"> <!--v-if="picked === 'temp1'" -->
-                <div class="back-temp temp1">
-                    <div class="temp1-bg"></div>
-                    <div class="temp1-name">
-                        <Strong>See you Soon bitch!!!</Strong>
-                        <br><small>{{businessData.company}}</small>
-                    </div>
-                    <div id="temp1-content">
-                        <img src="../assets/google.png">
-                    </div>
-                    <div class="red-ts"></div>
-                    <div class="red-tb"></div>
-                </div>
-            </div>
+            <!-- <template2 :temp2Data="exportResult"></template2> -->
         </div>
     </div>
 </template>
 <script>
+import template2 from './templates/Template2.vue';
+import template3 from './templates/Template3.vue';
 export default {
+    components: {
+        template2,
+        template3
+    },
     data(){
         return {
             businessData: {
@@ -205,6 +124,7 @@ export default {
                 countryCode: "",
                 phoneNumber: ""
             },
+            exportResult:{},
             businessFrmError: [],
             bString: '',
             isQrDisplayed: false,
@@ -217,6 +137,7 @@ export default {
             this.businessFrmError= [];
             if(!this.businessData.fname.trim()){
                 this.businessFrmError.push("First Name is required.");
+
                 return true;
             };
             if(this.businessData.fname.trim().search(/^[A-Za-z ]+$/) === -1){
@@ -282,7 +203,7 @@ export default {
             var qrcode = new QRCode("qrcode");  
             const elText = this.createBusinessdata();
             if (!elText) {
-                alert("Input a text to generate QR Code");
+                //alert("Input a text to generate QR Code");
                 return;
             }
             qrcode.makeCode(elText);
@@ -292,6 +213,7 @@ export default {
             document.getElementById('qrcode').innerHTML = '';
             this.generateCode();
             this.bString = '';
+            this.exportResult = this.businessData;
             this.isQrDisplayed = true;
         },
 
@@ -305,7 +227,7 @@ export default {
     
 }
 </script>
-<style>
+<style scoped>
 .country-code{
     width: 23%;
     display: inline;
@@ -348,21 +270,7 @@ export default {
     margin: 0 20px;
     align-items: center;
 }
-.show-qr{
-    /* margin:20px;*/
-    padding: 20px; 
-    text-align: center;
-    height: 350px;
-    border: 1px solid black;
-    border-radius: 5px;
-}
-.download-btn{
-    margin-top: 50px;
-}
-.check-box{
-    position: absolute;
-    z-index: 10;
-}
+
 .real-temp{
     margin: 10px;
     border-radius: 5px;
@@ -397,125 +305,6 @@ export default {
     background-color: #fff;
     border-radius: 5px;
 }
-#temp-qr img{
-    width: 80px;
-    height: auto;
-}
-/* Template-2 CSS starts here */
-.template:hover .flip-inner {
-  transform: rotateY(180deg);
-  background-color: #ffffff;
-}
-
-.flip-inner{
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transition: transform 1.5s;
-    transform-style: preserve-3d;
-}
-.back-temp, .front-temp{
-    position:absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #fff;
-    background-size: 371px 220px;
-    background-repeat: no-repeat;
-}
-.front-temp{
-    z-index: 3;
-    display: flex;
-    position: relative;
-}
-.back-temp{
-    transform: rotateY(180deg);
-    z-index: 1;
-}
-.temp1-bg{
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    z-index: -1;
-    background-color: #000;
-    -webkit-clip-path: polygon(55% 0, 100% 0, 100% 100%, 70% 100%);
-    clip-path: polygon(55% 0, 100% 0, 100% 100%, 70% 100%);
-}
-.temp1-name{
-    position: absolute;
-    top: 25px;
-    left: 0;
-    width: 220px;
-    height: 30px;
-    display: inline-block;
-    color: #fff;
-    padding: 5px 20px;
-    text-transform: uppercase;
-    line-height: 1;
-    background-color: red;
-    -webkit-clip-path: polygon(0 1%, 95% 0, 100% 100%, 0% 100%);
-    clip-path: polygon(0 1%, 95% 0, 100% 100%, 0% 100%);
-}
-.temp1-content{
-    position: absolute;
-    top: 140px;
-    left: 20px;
-    width: 200px;
-    height: 90px;
-    display: inline-block;
-}
-#temp1-content img{
-    margin-top: 70px;
-    width: 200px;
-    height: auto;
-}
-.temp1-h{
-    color: gray;
-    font-size: 12px;
-    line-height: 1.5;
-}
-.temp1-h div{
-    background-color: red; 
-    width: 14px;
-    padding: 0 5px;
-    color: #fff;
-    font-weight: bold;
-    display: inline-block;
-}
-.red-ts{
-    position:absolute;
-    width: 85px;
-    height: 30px;
-    background-color: #be1e1e;
-    top: 64px;
-    left: 207px;
-    -webkit-clip-path: polygon(63% 0, 15% 0, 24% 100%);
-    clip-path: polygon(63% 0, 15% 0, 24% 100%);
-}
-.red-tb{
-    top: 70px;
-    left: 93px;
-    position: absolute;
-    background-color: #be1e1e;
-    width: 200px;
-    height: 150px;
-    -webkit-clip-path: polygon(84% 100%, 71% 35%, 55% 100%);
-    clip-path: polygon(84% 100%, 71% 35%, 55% 100%);
-}
-
-.temp2{
-    background-image: url('../assets/1657e775446eefc.png');
-    overflow:hidden;
-}
-.temp2-content{
-    width:50%;
-    height: 100%;
-    padding: 10px;
-    color: #000;
-    text-align: right;
-}
-
 
 /* Media Querry starts here */
 @media only screen and (max-width: 1000px){

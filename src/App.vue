@@ -64,5 +64,52 @@ h2{
   background-color: red;
   color: azure;
 }
+#qrcode img{
+    width: 100%;
+    height: auto;
+}
+.template{
+    margin: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    height: 220px;
+    width: 370px;
+    -webkit-box-shadow: 3px 3px 33px 3px rgba(0,0,0,0.6);
+    -moz-box-shadow: 3px 3px 33px 3px rgba(0,0,0,0.6);
+    box-shadow: 3px 3px 33px 3px rgba(0,0,0,0.6);
+}
+
+/* Template CSS starts here */
+.template:hover .flip-inner {
+  transform: rotateY(180deg);
+  background-color: #ffffff;
+}
+
+.flip-inner{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 1.5s;
+    transform-style: preserve-3d;
+}
+.back-temp, .front-temp{
+    position:absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    background-size: 371px 220px;
+    background-repeat: no-repeat;
+}
+.front-temp{
+    z-index: 2;
+    display: flex;
+    position: relative;
+}
+.back-temp{
+    transform: rotateY(180deg);
+    z-index: 1;
+}
 
 </style>
